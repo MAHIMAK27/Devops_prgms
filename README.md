@@ -93,6 +93,4 @@ Build tools like Maven and Gradle are essential in DevOps because they:
 
 This experiment provided practical exposure to build automation tools and their integration with Jenkins. Understanding Maven and Gradle is crucial for implementing efficient DevOps practices, as they form the foundation for continuous integration and delivery pipelines.
 
----
-
 This repository reflects my learning and hands-on experience with build tools and automation in a DevOps environment.
