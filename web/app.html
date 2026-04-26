@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shoe Shop</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+}
+
+/* Center Box */
+.container {
+    width: 320px;
+    margin: 80px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px gray;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Inputs */
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 10px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #333;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: blue;
+    cursor: pointer;
+}
+
+/* Dashboard */
+header {
+    background: black;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logout {
+    color: white;
+    cursor: pointer;
+}
+
+/* Product Cards */
+.products {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px gray;
+    text-align: center;
+}
+</style>
+
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="container" id="login">
+    <h2>Login</h2>
+    <form onsubmit="event.preventDefault(); login();">
+        <input type="text" id="loginUser" placeholder="Username" required>
+        <input type="password" id="loginPass" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <p>
+        <a onclick="show('signup')">Create Account</a> |
+        <a onclick="show('forgot')">Forgot Password?</a>
+    </p>
+</div>
+
+<!-- SIGNUP -->
+<div class="container hidden" id="signup">
+    <h2>Create Account</h2>
+    <form onsubmit="event.preventDefault(); signup();">
+        <input type="text" id="newUser" placeholder="Username" required>
+        <input type="password" id="newPass" placeholder="Password" required>
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <p><a onclick="show('login')">Back to Login</a></p>
+</div>
+
+<!-- FORGOT -->
+<div class="container hidden" id="forgot">
+    <h2>Forgot Password</h2>
+    <form onsubmit="event.preventDefault(); forgot();">
+        <input type="text" id="forgotUser" placeholder="Enter Username" required>
+        <button type="submit">Recover</button>
+    </form>
+
+    <p><a onclick="show('login')">Back to Login</a></p>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="hidden">
+    <header>
+        <h2>Shoe Shop Dashboard 👟</h2>
+        <span class="logout" onclick="logout()">Logout</span>
+    </header>
+
+    <div class="products">
+        <div class="card">
+            <h3>Nike Air Max</h3>
+            <p>₹5000</p>
+        </div>
+
+        <div class="card">
+            <h3>Adidas Ultraboost</h3>
+            <p>₹6500</p>
+        </div>
+
+        <div class="card">
+            <h3>Puma Running Shoes</h3>
+            <p>₹4000</p>
+        </div>
+    </div>
+</div>
+
+<script>
+let userData = {};
+
+// Show pages safely
+function show(page) {
+    document.getElementById("login").classList.add("hidden");
+    document.getElementById("signup").classList.add("hidden");
+    document.getElementById("forgot").classList.add("hidden");
+
+    document.getElementById(page).classList.remove("hidden");
+}
+
+// Signup
+function signup() {
+    let user = document.getElementById("newUser").value.trim();
+    let pass = document.getElementById("newPass").value.trim();
+
+    if(user && pass){
+        userData[user] = pass;
+        alert("Account Created Successfully!");
+        show('login');
+    } else {
+        alert("Please enter all details");
+    }
+}
+
+// Login
+function login() {
+    let user = document.getElementById("loginUser").value.trim();
+    let pass = document.getElementById("loginPass").value.trim();
+
+    if(userData[user] && userData[user] === pass){
+        document.getElementById("login").classList.add("hidden");
+        document.getElementById("dashboard").classList.remove("hidden");
+    } else {
+        alert("Invalid Username or Password");
+    }
+}
+
+// Forgot Password
+function forgot() {
+    let user = document.getElementById("forgotUser").value.trim();
+
+    if(userData[user]){
+        alert("Your password is: " + userData[user]);
+    } else {
+        alert("User not found");
+    }
+}
+
+// Logout
+function logout() {
+    document.getElementById("dashboard").classList.add("hidden");
+    document.getElementById("login").classList.remove("hidden");
+}
+</script>
+</body>
+</html>
