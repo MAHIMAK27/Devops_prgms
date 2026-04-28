@@ -7,5 +7,5 @@
   tasks:
     - name: Copy JAR file 
       copy:
-        src: "/home/administrator/margi/jenkins/workspace/HelloMaven/target/MyFirstMavenApp-1.0-SNAPSHOT.jar"
+        src: "target/MyFirstMavenApp-1.0-SNAPSHOT.jar"
         dest: "/opt/deployment/HelloMaven.jar"
