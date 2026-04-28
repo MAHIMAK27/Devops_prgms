@@ -1,14 +1,11 @@
 ---
 - name: Basic Server Setup
-  hosts: localhost
+  hosts: local
+  connection: local
   become: yes
 
   tasks:
-    - name: Update apt cache
-      apt:
-        update_cache: yes
-
-    - name: Install curl
-      apt:
-        name: curl
-        state: present
+    - name: Copy JAR file 
+      copy:
+        src: "/home/administrator/margi/jenkins/workspace/HelloMaven/target/MyFirstMavenApp-1.0-SNAPSHOT.jar"
+        dest: "/opt/deployment/HelloMaven.jar"
